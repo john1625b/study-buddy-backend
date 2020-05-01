@@ -2,7 +2,8 @@ const { Client } = require('pg');
 const express = require('express');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
+console.log('port used:', port)
 
 const client = new Client({
   connectionString: 'postgres://aunyheipusmsan:9991e0c9017992e076140123aa1c9eb306be4505e3e4c051109be62c4227a85e@ec2-3-234-109-123.compute-1.amazonaws.com:5432/d7t6af5r5aip0g',
@@ -43,7 +44,7 @@ function hi() {
 	return '123'
 }
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('Hello world, root response'));
 app.get('/get_table', (req, res) => res.send(get_table() ));
 app.get('/query', (req, res) => query().then(val => res.send(val) ));
 
